@@ -1,0 +1,161 @@
+######################################################################
+# Program Name: Module 8: Portfolio Project Option 1 - Program Corrections, Lessons Learned, and Vehicle Inventory Program
+# Author: Alberto Lavalle
+# Due Date: June 6th, 2021
+#------------------------------------------------------------------------------
+# Pseudocode: 
+# Step 1.) Create an automobile class that will be used by a dealership as a vehicle inventory program.
+#          The following attributes should be present in your automobile class:
+#           a.) private string make
+#           b.) private string model
+#           c.) private string color
+#           d.) private int year
+#           e.) private int mileage
+# Step 2.) Your program should have appropriate methods such as:
+#           a.) constructor
+#           b.) add a new vehicle
+#           c.) remove a vehicle
+#           d.) update vehicle attributes
+#------------------------------------------------------------------------------
+# Program Inputs: Vehicle inventory information from Lavalle's Auto Sales.
+# Program Outputs: All vehicle inventory to a text file.
+#------------------------------------------------------------------------------
+######################################################################
+
+print("Hello & Welcome to the Lavalle's Auto Sales vehicle inventory information.")
+print("Please read carefully from the following menu options.")
+
+class Automobile:
+    # creating an Automobile class for each specific vehicle information
+    
+    def __init__(self, make="", model="", color="", year=2021, mileage=0):
+        # defining constructor for make, model, color, year, & mileage
+        self.make = make
+        self.model = model
+        self.color = color
+        self.year = year
+        self.mileage = mileage
+
+
+    def set_make(self, make):# defining all set creators methods for make, model, color, year, & mileage
+        self.make = make
+
+
+    def set_model(self, model):
+        self.model = model
+
+
+    def set_color(self, color):
+        self.color = color
+
+
+    def set_year(self, year):
+        self.year = year
+
+
+    def set_mileage(self, mileage):
+        self.mileage = mileage
+
+
+    def get_make(self):# defining get creator methods for self (make, model, color, year, & mileage)
+        return self.make
+
+
+    def get_model(self):
+        return self.model
+
+
+    def get_color(self):
+        return self.color
+
+
+    def get_year(self):
+        return self.year
+
+
+    def get_mileage(self):
+        return self.mileage
+
+
+# this the second part of code program after creating the class
+
+def add_vehicle(vehicle_list):
+    # defining creator method in order to be able to add vehicles in inventory info
+    make = input("   Please enter MAKE of vehicle: ")
+    model = input("   Please enter MODEL of vehicle: ")
+    color = input("   Please enter COLOR of vehicle: ")
+    year = int(input("   Please enter YEAR of vehicle: "))
+    mileage = int(input("   Please enter MILEAGE of vehicle: "))
+    vehicle = Automobile(make, model, color, year, mileage)
+    vehicle_list.append(vehicle)
+    print("Your vehicle has now been ADDED to the car inventory. ")
+
+
+def remove_vehicle(vehicle_list):
+    # defining creator method in order to delete vehicles out of the inventory
+    directory = int(input("Enter the DIRECTORY # of vehicle to be removed: "))
+    if directory >= 0 and directory < len(vehicle_list):
+        make = vehicle_list[directory].get_make()
+        model = vehicle_list[directory].get_model()
+        vehicle_list.pop(directory)
+        print(make, model, " has now been deleted from the inventory records.")
+    else:
+        print("Not a valid DIRECTORY number.")
+
+
+def update_vehicle(vehicle_list):
+    # defining creator method in order to update any needed vehicles info from inventory
+    directory = int(input("Enter the DIRECTORY # of vehicle to be updated: "))
+    if directory >= 0 and directory < len(vehicle_list):
+        make = input("   Please enter NEW MAKE of vehicle: ")
+        model = input("   Please enter NEW MODEL of vehicle: ")
+        color = input("   Please enter NEW COLOR of vehicle: ")
+        year = int(input("   Please enter NEW YEAR of vehicle: "))
+        mileage = int(input("   Please enter NEW MILEAGE of vehicle: "))
+        vehicle_list[directory].set_make(make)
+        vehicle_list[directory].set_model(model)
+        vehicle_list[directory].set_color(color)
+        vehicle_list[directory].set_year(year)
+        vehicle_list[directory].set_mileage(mileage)
+        print("Your vehicle has now been UPDATED to the car inventory.")
+    else:
+        print("Not a valid DIRECTORY number.")
+
+
+def display_vehicles(vehicle_list):
+    # defining creator method in order to display vehicles & details 
+    print('{:12} {:12} {:12} {:12} {:12} {:12}'.format('DIRECTORY#', 'MAKE', 'MODEL', 'COLOR', 'YEAR', 'MILEAGE'))
+    for i in range(len(vehicle_list)):
+        vehicle = vehicle_list[i]
+        print('{:12} {:12} {:12} {:12} {:12} {:12}'.format(str(i), vehicle.get_make(), vehicle.get_model(), vehicle.get_color(),
+                                                           str(vehicle.get_year()), str(vehicle.get_mileage())))
+
+
+vehicle_list = []  # CREATING LIST for vehicle menu
+while True:
+    # creating a while loop in order to play it indefinitely
+    # creating display menu for choices to be picked
+    print("1.) Add a new vehicle to inventory")
+    print("2.) Remove a vehicle from the inventory")
+    print("3.) Update a vehicle in the inventory")
+    print("4.) View all vehicles located in the inventory")
+    print("5.) Exit inventory program")
+    # creating choices for menu selection
+    ch = int(input("Please select & enter a menu choice from 1-5:  "))
+    # executing the menu choices of the user on the menu choice
+    if ch == 1:
+        add_vehicle(vehicle_list)
+    elif ch == 2:
+        remove_vehicle(vehicle_list)
+    elif ch == 3:
+        update_vehicle(vehicle_list)
+    elif ch == 4:
+        display_vehicles(vehicle_list)
+    elif ch == 5:
+        break;
+    else:
+        print("Incorrect Menu Choice")
+
+print("End of Simulation")
+##########################################################################################################################################
+
